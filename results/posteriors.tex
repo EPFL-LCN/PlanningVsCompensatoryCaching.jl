@@ -1,0 +1,41 @@
+\begin{tikzpicture}
+\begin{axis}[ybar, bar width={14pt}, xmin={-0.5}, xmax={3.2}, width={\textwidth}, height={7cm}, line width={0pt}, xtick={0.0,1.0,1.6,2.2,2.8}, ymax={5}, major tick length={0}, xticklabels={comp. independent,comp. dependent,\hspace{10mm} CCH,\hspace{9mm} FPH 1,\hspace{9mm} FPH 2}, ymode={log}, log origin={infty}, title={$P(M|D)$}, legend to name={modelcomparisonlegend}, legend columns={-1}, legend style={draw = none, nodes = {inner sep = 8pt}}]
+    \addlegendimage{color = blue!70}
+                                  \addlegendentry[color = black]{bird independent}
+                             \addlegendimage{color = red!70}
+                             \addlegendentry[color = black]{bird dependent }\addlegendimage{fill = black, line width = 0pt}
+                             \addlegendentry[color = black]{food independent },
+                             \addlegendimage{pattern = crosshatch, line width = 0pt}
+                             \addlegendentry[color = black]{food dependent }
+    \addplot[fill={blue!70}, draw={blue!70}]
+        coordinates {
+            (0.0,1.505392088345301e-8)
+            (1.0,1.5796565891277292e-9)
+        }
+        ;
+    \addplot[fill={red!70}, draw={red!70}]
+        coordinates {
+            (0.0,1.505392088345301e-8)
+            (1.0,1.302939663039849e-10)
+        }
+        ;
+    \addplot[pattern={crosshatch}, draw={blue!70}, pattern color={blue!70}]
+        coordinates {
+            (0.0,3.7895668899788236e-5)
+            (1.0,3.693102877793651e-6)
+            (1.6,3.704713820639924e-6)
+            (2.2,5.1481257459097214e-6)
+            (2.8,4.66050330297554e-7)
+        }
+        ;
+    \addplot[pattern={crosshatch}, draw={red!70}, pattern color={red!70}]
+        coordinates {
+            (0.0,0.9991385340631398)
+            (1.0,0.0004595697669924975)
+            (1.6,0.00012729813107403273)
+            (2.2,0.00018355822939296085)
+            (2.8,4.010032993405097e-5)
+        }
+        ;
+\end{axis}
+\end{tikzpicture}

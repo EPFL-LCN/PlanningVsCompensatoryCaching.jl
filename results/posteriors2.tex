@@ -1,0 +1,26 @@
+\begin{tikzpicture}
+\begin{axis}[ybar, bar width={14pt}, xmin={-0.5}, xmax={3.2}, width={\textwidth}, height={7cm}, line width={0pt}, xtick={0.0,1.0,1.6,2.2,2.8}, ymax={5}, major tick length={0}, xticklabels={comp. independent,comp. dependent, CCH, FPH 1, FPH 2}, ymode={log}, log origin={infty}, title={$P(M|D)$}, legend to name={modelcomparisonlegend2}, legend columns={-1}, legend style={draw = none, nodes = {inner sep = 8pt}}]
+    \addlegendimage{color = blue!70}
+                                  \addlegendentry[color = black]{bird independent}
+                             \addlegendimage{color = red!70}
+                             \addlegendentry[color = black]{bird dependent }
+    \addplot[fill={blue!70}, draw={blue!70}]
+        coordinates {
+            (0.0,0.4579403509164817)
+            (1.0,0.017776136350226582)
+            (1.6,0.04816181140415967)
+            (2.2,0.0004464940537938724)
+            (2.8,0.00044649475563229954)
+        }
+        ;
+    \addplot[fill={red!70}, draw={red!70}]
+        coordinates {
+            (0.0,0.4579403509164817)
+            (1.0,0.0050427125505411365)
+            (1.6,0.012224103096101857)
+            (2.2,9.749039533615621e-6)
+            (2.8,1.179691704749242e-5)
+        }
+        ;
+\end{axis}
+\end{tikzpicture}

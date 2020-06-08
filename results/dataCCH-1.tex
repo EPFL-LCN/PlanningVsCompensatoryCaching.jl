@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\begin{axis}[ybar, bar width={10pt}, title={CCH}, width={3.5cm}, ymin={-4}, ymax={5}, axis x line={middle}, axis y line={left}, xmin={0.5}, xmax={3.5}, xtick={1,2,3}, xticklabels={}, xticklabel shift={2mm}, y axis line style={{<->}}, x axis line style={{-}}, ytick={\empty}, ylabel={f$_2$\hspace{1.2cm} f$_1$}, ylabel style={yshift={0pt}}, yticklabels={f$_2$,f$_1$}, yticklabel={{\scriptsize
+                                   \ifdim\tick pt < 0pt
+                                   \pgfmathparse{-1*\tick}
+                                   \pgfmathprintnumber{\pgfmathresult}
+                                   \else
+                                   \pgfmathprintnumber{\tick}
+                                   \fi}}]
+    \addplot
+        coordinates {
+            (1,2)
+            (2,4)
+            (3,1)
+            (1,-3)
+            (2,-1)
+            (3,-3)
+        }
+        ;
+\end{axis}
+\end{tikzpicture}
