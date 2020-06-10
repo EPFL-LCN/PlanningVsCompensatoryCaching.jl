@@ -8,7 +8,7 @@ Piero Amodio, Johanni Brea,Benjamin Farrar, Ljerka Ostojic and Nicola S. Clayton
 To run the data analysis open a [julia](https://julialang.org) REPL and run
 ```julia
 using Pkg
-Pkg.add("https://github.com/jbrea/PlanningVsCompensatoryCaching.jl")
+Pkg.add(PackageSpec(url = "https://github.com/jbrea/PlanningVsCompensatoryCaching.jl"))
 Pkg.activate("PlanningVsCompensatoryCaching")
 import PlanningVsCompensatoryCaching
 include(joinpath(dirname(pathof(PlanningVsCompensatoryCaching))))
