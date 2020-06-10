@@ -2,14 +2,14 @@ import PlanningVsCompensatoryCaching: load_data, sort_semantically,
 datatotextable, plotallindividualdata, logcategoricalposterior, plotcomparison,
 pgfsave, compute_posterior
 
-const TEXDIR = joinpath(@__DIR__, "results/")
+@isdefined(RESULT_DIR) || (RESULT_DIR = joinpath(@__DIR__, "results/"))
 
 @info "Analysing Experiment 1..."
 
 data1, data1_sorted, cached1 = load_data(joinpath(@__DIR__, "data", "experiment1.yaml"))
 
 # Export raw and sorted data.
-write(joinpath(TEXDIR, "datatable.tex"), datatotextable(data1, data1_sorted))
+write(joinpath(RESULT_DIR, "datatable.tex"), datatotextable(data1, data1_sorted))
 
 # Define qualitatively some hypotheses and plot them together with the data.
 data_sorted_with_hypothesis = deepcopy(data1_sorted)
@@ -22,7 +22,7 @@ data_sorted_with_hypothesis[:FPH2] = (comp_order = [:A, :B, :C],
 data_sorted_with_hypothesis[:CCH] = (comp_order = [:A, :B, :C],
                                      prefed_order = [:P, :M],
                                      cached = [2 3; 4 1; 1 3])
-plotallindividualdata(data_sorted_with_hypothesis, dir = TEXDIR,
+plotallindividualdata(data_sorted_with_hypothesis, dir = RESULT_DIR,
                       xlabelat = "FPH1", titles = Dict(:FPH1 => "FPH 1",
                                                        :FPH2 => "FPH 2"));
 
@@ -37,7 +37,7 @@ posteriors = compute_posterior(cached1, models)
 
 # Generate comparison plots.
 p1 = plotcomparison(posteriors, models, title = "\$P(M|D)\$", ymax = 5);
-pgfsave(joinpath(TEXDIR, "posteriors.tex"), p1, include_preamble = false)
+pgfsave(joinpath(RESULT_DIR, "posteriors.tex"), p1, include_preamble = false)
 
 
 """
@@ -65,7 +65,7 @@ pgfsave, compute_posterior
 data2, data2_sorted, cached2 = load_data(joinpath(@__DIR__, "data", "experiment2.yaml"))
 
 # Export raw and sorted data.
-write(joinpath(TEXDIR, "datatable2.tex"), datatotextable2(data2, data2_sorted))
+write(joinpath(RESULT_DIR, "datatable2.tex"), datatotextable2(data2, data2_sorted))
 
 # Define qualitatively some hypotheses and plot them together with the data.
 data_sorted_with_hypothesis = deepcopy(data2_sorted)
@@ -88,7 +88,7 @@ data_sorted_with_hypothesis[:CCHNF] = (comp_order = [:A, :B, :C],
                                        prefed_order = [:N, :F],
                                        cached = [2; 1; 2])
 plotallindividualdata(data_sorted_with_hypothesis, exp = 2, xlabelat = "FPH1",
-                      y_axis_line_style = "{->}", dir = TEXDIR, ylabel = "cached",
+                      y_axis_line_style = "{->}", dir = RESULT_DIR, ylabel = "cached",
                       titles = Dict(:FPH1 => "FPH 1", :FPH2 => "FPH 2",
                                     :CCHNF => "CCH", :FPH1NF => "FPH 1",
                                     :FPH2NF => "FPH 2"));
@@ -108,7 +108,7 @@ posteriors = (x -> x ./ sum(x))(exp.(lp_fn .+ lp_nf))
 @show posteriors
 
 p1 = plotcomparison(posteriors, models, title = "\$P(M|D)\$", altpattern = "north east lines", ymax = 5, exp2 = true, legendtoname = "modelcomparisonlegend2", legendentries = ["bird independent", "bird dependent"]);
-pgfsave(joinpath(TEXDIR, "posteriors2.tex"), p1, include_preamble = false)
+pgfsave(joinpath(RESULT_DIR, "posteriors2.tex"), p1, include_preamble = false)
 
 """
 Conclusion
