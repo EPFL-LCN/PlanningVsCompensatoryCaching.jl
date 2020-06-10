@@ -1,14 +1,15 @@
-# PlanningVsCompensatoryCaching.jl
+# Testing two competing hypotheses for Eurasian jays' caching for the future: planning versus compensatory caching
 
-![Lifecycle](https://img.shields.io/badge/lifecycle-experimental-orange.svg)<!--
-![Lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-retired-orange.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-archived-red.svg)
-![Lifecycle](https://img.shields.io/badge/lifecycle-dormant-blue.svg) -->
-[![Build Status](https://travis-ci.com/jbrea/PlanningVsCompensatoryCaching.jl.svg?branch=master)](https://travis-ci.com/jbrea/PlanningVsCompensatoryCaching.jl)
-[![codecov.io](http://codecov.io/github/jbrea/PlanningVsCompensatoryCaching.jl/coverage.svg?branch=master)](http://codecov.io/github/jbrea/PlanningVsCompensatoryCaching.jl?branch=master)
-<!--
-[![Documentation](https://img.shields.io/badge/docs-stable-blue.svg)](https://jbrea.github.io/PlanningVsCompensatoryCaching.jl/stable)
-[![Documentation](https://img.shields.io/badge/docs-master-blue.svg)](https://jbrea.github.io/PlanningVsCompensatoryCaching.jl/dev)
--->
+This repository contains the data and the code of the data analysis of
+
+Piero Amodio, Johanni Brea,Benjamin Farrar, Ljerka Ostojic and Nicola S. Clayton, (2020),
+"Testing two competing hypotheses for Eurasian jays' caching for the future: planning versus compensatory caching".
+
+To run the data analysis open a [julia](https://julialang.org) REPL and run
+```julia
+using Pkg
+Pkg.add("https://github.com/jbrea/PlanningVsCompensatoryCaching.jl")
+Pkg.activate("PlanningVsCompensatoryCaching")
+import PlanningVsCompensatoryCaching
+include(joinpath(dirname(pathof(PlanningVsCompensatoryCaching))))
+```

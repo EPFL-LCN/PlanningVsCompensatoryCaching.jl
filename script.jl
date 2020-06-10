@@ -2,11 +2,11 @@ import PlanningVsCompensatoryCaching: load_data, sort_semantically,
 datatotextable, plotallindividualdata, logcategoricalposterior, plotcomparison,
 pgfsave, compute_posterior
 
-const TEXDIR = "results/"
+const TEXDIR = joinpath(@__DIR__, "results/")
 
 @info "Analysing Experiment 1..."
 
-data1, data1_sorted, cached1 = load_data("data/experiment1.yaml")
+data1, data1_sorted, cached1 = load_data(joinpath(@__DIR__, "data", "experiment1.yaml"))
 
 # Export raw and sorted data.
 write(joinpath(TEXDIR, "datatable.tex"), datatotextable(data1, data1_sorted))
@@ -62,7 +62,7 @@ pgfsave, compute_posterior
 
 @info "Analysing Experiment 2..."
 
-data2, data2_sorted, cached2 = load_data("data/experiment2.yaml")
+data2, data2_sorted, cached2 = load_data(joinpath(@__DIR__, "data", "experiment2.yaml"))
 
 # Export raw and sorted data.
 write(joinpath(TEXDIR, "datatable2.tex"), datatotextable2(data2, data2_sorted))
