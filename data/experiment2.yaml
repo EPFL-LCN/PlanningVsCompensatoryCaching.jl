@@ -1,0 +1,25 @@
+Caracas:
+  comp_order: [B, C, A]
+  prefed_order: [F, N]
+         # A  B  C
+  cached: [7, 8, 7]
+Washington:
+  comp_order: [C, A, B]
+  prefed_order: [F, N]
+  cached: [2, 2, 3]
+Quito:
+  comp_order: [A, B, C]
+  prefed_order: [F, N]
+  cached: [9, 8, 8]
+Wellington:
+  comp_order: [C, A, B]
+  prefed_order: [N, F]
+  cached: [0, 1, 1]
+Rome:
+  comp_order: [A, B, C]
+  prefed_order: [N, F]
+  cached: [6, 3, 7]
+Lisbon:
+  comp_order: [B, C, A]
+  prefed_order: [N, F]
+  cached: [7, 0, 1]
