@@ -26,7 +26,7 @@ function datatotextable2(raw, rearranged)
     s *= "\\multicolumn{2}{c|}{} & \\multicolumn{3}{c||}{\\cellcolor{gray!20} Raw Data} & \\multicolumn{3}{c}{\\cellcolor{gray!20}Sorted Data}\\\\\n"
     s *= "Bird & Sequence & A & B & C & K\$_1\$  & K\$_2\$ & K\$_3\$ \\\\\\midrule\n"
     for (k, (c, f, d)) in raw
-        s *= "$k & $(join(map(string, c)))-$(join(map(string, f))) & $(numberstotex(d)) & $(numberstotex(rearranged[k].cached)) \\\\\n"
+        s *= "$k & $(join(map(string, f)))-$(join(map(string, c))) & $(numberstotex(d)) & $(numberstotex(rearranged[k].cached)) \\\\\n"
      end
      s *= "\\end{tabular}"
 end
