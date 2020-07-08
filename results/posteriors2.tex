@@ -1,25 +1,28 @@
 \begin{tikzpicture}
-\begin{axis}[ybar, bar width={14pt}, xmin={-0.5}, xmax={3.2}, width={\textwidth}, height={7cm}, line width={0pt}, xtick={0.0,1.0,1.6,2.2,2.8}, ymax={5}, major tick length={0}, xticklabels={comp. independent,comp. dependent, CCH, FPH 1, FPH 2}, ymode={log}, log origin={infty}, title={$P(M|D)$}, legend to name={modelcomparisonlegend2}, legend columns={-1}, legend style={draw = none, nodes = {inner sep = 8pt}}]
+\begin{axis}[ybar, bar width={14pt}, xmin={-0.3}, xmax={3.1}, width={\textwidth}, height={7cm}, line width={0pt}, xtick={0.0,1.0,1.6,2.2,2.8}, ymax={5}, major tick length={0}, xticklabels={\hspace{32pt}\parbox{2cm}{\centering compartement\\ independent},\hspace{16pt}\parbox{2cm}{\centering compartement\\dependent},\hspace{16pt} CCH,\hspace{16pt} FPH 1,\hspace{16pt} FPH 2}, ymode={log}, log origin={infty}, title={$P(M|D)$}, legend to name={modelcomparisonlegend2}, legend columns={-1}, legend style={draw = none, nodes = {inner sep = 8pt}}]
     \addlegendimage{color = blue!70}
                                   \addlegendentry[color = black]{bird independent}
                              \addlegendimage{color = red!70}
                              \addlegendentry[color = black]{bird dependent }
+    \addplot[fill={gray}, draw={gray}, bar shift={16pt}]
+        coordinates {
+            (0.0,0.7187727307958244)
+        }
+        ;
     \addplot[fill={blue!70}, draw={blue!70}]
         coordinates {
-            (0.0,0.4579403509164817)
-            (1.0,0.017776136350226582)
-            (1.6,0.04816181140415967)
-            (2.2,0.0004464940537938724)
-            (2.8,0.00044649475563229954)
+            (1.0,0.09544329786999925)
+            (1.6,0.1597161630374311)
+            (2.2,0.002215348073613251)
+            (2.8,0.0017186104092861436)
         }
         ;
     \addplot[fill={red!70}, draw={red!70}]
         coordinates {
-            (0.0,0.4579403509164817)
-            (1.0,0.0050427125505411365)
-            (1.6,0.012224103096101857)
-            (2.2,9.749039533615621e-6)
-            (2.8,1.179691704749242e-5)
+            (1.0,0.00791492661285898)
+            (1.6,0.014096306374325655)
+            (2.2,7.540176200475199e-5)
+            (2.8,4.721506465651258e-5)
         }
         ;
 \end{axis}

@@ -27,7 +27,7 @@ plotallindividualdata(data_sorted_with_hypothesis, dir = RESULT_DIR,
                                                        :FPH2 => "FPH 2"));
 
 models = [[(bird_indep = b, compartement_indep = c, food_indep = f, hyp = nothing)
-           for b in (true, false), f in (true, false), c in (true, false)]...;
+           for b in (true, false), f in (true, false), c in (true, false) if !(b && c && f)]...;
           [(bird_indep = b, compartement_indep = false, food_indep = false, hyp = h)
            for b in (true, false), h in (:cch, :fph1, :fph2)]...]
 
@@ -94,7 +94,7 @@ plotallindividualdata(data_sorted_with_hypothesis, exp = 2, xlabelat = "FPH1",
                                     :FPH2NF => "FPH 2"));
 
 models = [[(bird_indep = b, compartement_indep = c, food_indep = true, hyp = nothing)
-           for b in (true, false), c in (true, false)]...;
+           for b in (true, false), c in (true, false) if !(b && c)]...;
           [(bird_indep = b, compartement_indep = false, food_indep = true, hyp = h)
            for b in (true, false), h in (:cch, :fph1, :fph2)]...]
 

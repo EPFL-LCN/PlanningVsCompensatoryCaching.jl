@@ -47,7 +47,6 @@ function _f(y, j)
 end
 function get_constraints(args...)
     y -> begin
-        d = length(y)
         (&)([a[2](_f(y, a[1]), _f(y, a[3])) for a in args]...)
     end
 end
@@ -277,8 +276,9 @@ function load_data(file_name)
                                comp_order = Symbol.(content["comp_order"]),
                                cached = cached)
     end
+    data_sorted = Dict(name => sort_semantically(content) for (name, content) in result)
     (data = result,
-     data_sorted = Dict(name => sort_semantically(content) for (name, content) in result),
-     cached = [b.cached for b in values(result)])
+     data_sorted = data_sorted,
+     cached = [b.cached for b in values(data_sorted)])
 end
 

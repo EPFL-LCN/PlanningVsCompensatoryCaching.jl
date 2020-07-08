@@ -9,20 +9,22 @@ function numberstotex(d)
 end
 function datatotextable(raw, rearranged)
     s = "\\begin{tabular}{l|c|cccccc||cccccc}\n"
+    s *= "\\multicolumn{2}{c|}{} & \\multicolumn{6}{c||}{\\cellcolor{gray!20} Raw Data} & \\multicolumn{6}{c}{\\cellcolor{gray!20}Sorted Data}\\\\\n"
     s *= " \\multicolumn{2}{c|}{} & \\multicolumn{2}{c}{A} &
     \\multicolumn{2}{c}{B} & \\multicolumn{2}{c||}{C} &
     \\multicolumn{2}{c}{K\$_1\$}  & \\multicolumn{2}{c}{K\$_2\$} &
     \\multicolumn{2}{c}{K\$_3\$} \\\\"
-    s *= "bird & protocoll & P & M & P & M & P & M & f\$_1\$ & f\$_2\$  & f\$_1\$  & f\$_2\$  & f\$_1\$  & f\$_2\$
+    s *= "Bird & Sequence & P & M & P & M & P & M & f\$_1\$ & f\$_2\$  & f\$_1\$  & f\$_2\$  & f\$_1\$  & f\$_2\$
           \\\\\\midrule\n"
     for (k, (c, f, d)) in raw
-        s *= "$k & $(join(map(string, c)))-$(join(map(string, f))) & $(numberstotex(d)) & $(numberstotex(rearranged[k].cached)) \\\\\n"
+        s *= "$k & $(join(map(string, f)))-$(join(map(string, c))) & $(numberstotex(d)) & $(numberstotex(rearranged[k].cached)) \\\\\n"
      end
      s *= "\\end{tabular}"
 end
 function datatotextable2(raw, rearranged)
     s = "\\begin{tabular}{l|c|ccc||ccc}\n"
-    s *= "bird & protocoll & A & B & C & K\$_1\$  & K\$_2\$ & K\$_3\$ \\\\\\midrule\n"
+    s *= "\\multicolumn{2}{c|}{} & \\multicolumn{3}{c||}{\\cellcolor{gray!20} Raw Data} & \\multicolumn{3}{c}{\\cellcolor{gray!20}Sorted Data}\\\\\n"
+    s *= "Bird & Sequence & A & B & C & K\$_1\$  & K\$_2\$ & K\$_3\$ \\\\\\midrule\n"
     for (k, (c, f, d)) in raw
         s *= "$k & $(join(map(string, c)))-$(join(map(string, f))) & $(numberstotex(d)) & $(numberstotex(rearranged[k].cached)) \\\\\n"
      end
@@ -90,28 +92,31 @@ function plotcomparison(y, models; title = "", ymax = 1, legend = true,
     plots = Any[]
     coords = [0, 1, 1.6, 2.2, 2.8]
     idx1 = findall(x -> x.bird_indep && x.food_indep, models)
+    push!(plots, @pgf Plot({fill = "gray", draw = "gray", bar_shift = exp2 ? "16pt" : "0pt"},
+                           Coordinates(coords[1:1], y[1:1])))
     push!(plots, @pgf Plot({fill = colors[2], draw = colors[2]},
-                           Coordinates(coords[1:length(idx1)], y[idx1])))
-    idx2 = findall(x -> !x.bird_indep && x.food_indep, models)
+                           Coordinates(coords[(2:length(idx1) + 1)], y[idx1])))
+    idx2 = findall(x -> !x.bird_indep && x.food_indep, models)[2:end]
     push!(plots, @pgf Plot({fill = colors[1], draw = colors[1]},
-                           Coordinates(coords[1:length(idx2)], y[idx2])))
+                           Coordinates(coords[(2:length(idx2) + 1)], y[idx2])))
     if !exp2
-    idx3 = findall(x -> x.bird_indep && !x.food_indep, models)
-    push!(plots, @pgf Plot({pattern = altpattern, draw = colors[2],
-                            pattern_color = colors[2]},
-                           Coordinates(coords[1:length(idx3)], y[idx3])))
-    idx4 = findall(x -> !x.bird_indep && !x.food_indep, models)
-    push!(plots, @pgf Plot({pattern = altpattern, draw = colors[1],
-                            pattern_color = colors[1]},
-                           Coordinates(coords[1:length(idx3)], y[idx4])))
+        idx3 = findall(x -> x.bird_indep && !x.food_indep, models)
+        push!(plots, @pgf Plot({pattern = altpattern, draw = colors[2],
+                                pattern_color = colors[2]},
+                               Coordinates(coords[1:length(idx3)], y[idx3])))
+        idx4 = findall(x -> !x.bird_indep && !x.food_indep, models)
+        push!(plots, @pgf Plot({pattern = altpattern, draw = colors[1],
+                                pattern_color = colors[1]},
+                               Coordinates(coords[1:length(idx3)], y[idx4])))
     end
-    a = @pgf Axis({ybar, bar_width = "14pt", xmin = -.5, xmax = 3.2, width = "\\textwidth",
+    a = @pgf Axis({ybar, bar_width = "14pt", xmin = -.3, xmax = exp2 ? 3.1 : 3.5, width = "\\textwidth",
                    height = "7cm", line_width = "0pt", xtick = coords, ymax = ymax,
                    major_tick_length = 0,
-                          xticklabels = ["comp. independent", "comp. dependent",
-                                         (exp2 ? "" : "\\hspace{10mm}") * " CCH",
-                                         (exp2 ? "" : "\\hspace{9mm}") * " FPH 1",
-                                         (exp2 ? "" : "\\hspace{9mm}") * " FPH 2"],
+                   xticklabels = [(exp2 ? "\\hspace{32pt}" : "\\hspace{32pt}") *"\\parbox{2cm}{\\centering compartement\\\\ independent}",
+                                  (exp2 ? "\\hspace{16pt}" : "\\hspace{16pt}") * "\\parbox{2cm}{\\centering compartement\\\\dependent}",
+                                  (exp2 ? "\\hspace{16pt}" : "\\hspace{48pt}") * " CCH",
+                                  (exp2 ? "\\hspace{16pt}" : "\\hspace{48pt}") * " FPH 1",
+                                  (exp2 ? "\\hspace{16pt}" : "\\hspace{48pt}") * " FPH 2"],
                           ymode = "log", log_origin = "infty",
                           title = title}, plots...)
     if legend
