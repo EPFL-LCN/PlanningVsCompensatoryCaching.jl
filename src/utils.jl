@@ -58,7 +58,7 @@ end
 function logpdf_dirichlet_int(x; constraints = y -> true)
     f = _integrand(x, constraints)
     K = length(x)
-    res = hcubature(f, SVector{K-1}(zeros(K-1)), SVector{K-1}(ones(K-1)), maxevals = 10^7)
+    res = hcubature(f, SVector{K-1}(zeros(K-1)), SVector{K-1}(ones(K-1)), maxevals = 10^5)
     res[2]/res[1] > .05 && @warn "Relative error in numerical integration = $(res[2]/res[1])"
     log(res[1])
 end
@@ -155,7 +155,7 @@ independence of the different parameters. The strategy is to sum all counts that
 are assumed to have the same rate and add the log probability that the individual
 counts are generated with a uniform Multinomial.
 """
-function logcategoricalposterior(data; bird_indep, compartement_indep, food_indep, N = 40, hyp = nothing, group = nothing)
+function logcategoricalposterior(data; bird_indep, compartement_indep, food_indep, N = 40, group = nothing, constraints = nothing, hyp = constraints)
     counts, ll = partialsums(data, bird_indep, compartement_indep, food_indep, N)
     if hyp == :cch
         if group === nothing
@@ -181,6 +181,8 @@ function logcategoricalposterior(data; bird_indep, compartement_indep, food_inde
         elseif group == :NF
             constraints = ((2, >, 1), (2, >, 3))
         end
+    elseif constraints !== nothing
+        constraints = constraints
     else
         constraints = y -> true
     end
