@@ -1,9 +1,9 @@
-# Testing two competing hypotheses for Eurasian jays' caching for the future: planning versus compensatory caching
+# Testing two competing hypotheses for Eurasian jays’ caching for the future
 
 This repository contains the data and the code of the data analysis of
 
-Piero Amodio, Johanni Brea,Benjamin Farrar, Ljerka Ostojic and Nicola S. Clayton, (2020),
-"Testing two competing hypotheses for Eurasian jays' caching for the future: planning versus compensatory caching".
+[Testing two competing hypotheses for Eurasian jays' caching for the future,](https://www.nature.com/articles/s41598-020-80515-7)
+Piero Amodio, Johanni Brea, Benjamin Farrar, Ljerka Ostojic and Nicola S. Clayton, Scientific Reports (2021)
 
 To run the data analysis open a [julia](https://julialang.org) REPL and run
 ```julia
