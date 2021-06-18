@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/378139647.svg)](https://zenodo.org/badge/latestdoi/378139647)
+
 # Testing two competing hypotheses for Eurasian jays’ caching for the future
 
 This repository contains the data and the code of the data analysis of
